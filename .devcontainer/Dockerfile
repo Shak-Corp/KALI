@@ -12,13 +12,15 @@ RUN apt update && apt install -y \
     mousepad xfce4-terminal \
     && apt clean
 
-# Set VNC password
-RUN mkdir -p /root/.vnc && \
-    echo "kali" | vncpasswd -f > /root/.vnc/passwd && \
-    chmod 600 /root/.vnc/passwd
+# Create non-root user (GitHub Codespaces requirement)
+RUN useradd -m kali && echo "kali:kali" | chpasswd && adduser kali sudo
 
-COPY startup.sh /startup.sh
-RUN chmod +x /startup.sh
+USER kali
+WORKDIR /home/kali
 
-WORKDIR /workspace
+RUN mkdir -p ~/.vnc && \
+    echo "kali" | vncpasswd -f > ~/.vnc/passwd && \
+    chmod 600 ~/.vnc/passwd
 
+COPY startup.sh /home/kali/startup.sh
+RUN chmod +x /home/kali/startup.sh
