@@ -1,0 +1,9 @@
+{
+  "name": "Kali Linux VNC GUI",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "root",
+  "forwardPorts": [5901],
+  "postCreateCommand": "bash /startup.sh"
+}
