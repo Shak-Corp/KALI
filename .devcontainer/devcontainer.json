@@ -3,7 +3,7 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "remoteUser": "root",
+  "remoteUser": "kali",
   "forwardPorts": [6080],
-  "postCreateCommand": "bash /startup.sh"
+  "postCreateCommand": "/home/kali/startup.sh"
 }
